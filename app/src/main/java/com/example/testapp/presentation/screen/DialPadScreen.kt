@@ -1,5 +1,12 @@
 package com.example.testapp.presentation.screen
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.with
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,11 +16,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,6 +48,8 @@ fun DialPadScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(32.dp))
+
+        AnimatedDialerInput(input)
 
         //DialPad
         DialPad { digit ->
@@ -119,7 +130,28 @@ fun DialPadButton(number: String, letters: String, onClick: () -> Unit) {
                 )
             }
         }
+    }
+}
 
-
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun AnimatedDialerInput(input: String) {
+    AnimatedContent(
+        targetState = input,
+        transitionSpec = {
+            // Slide in from bottom and fade
+            slideInVertically { height -> height } + fadeIn() with
+                    slideOutVertically { height -> -height } + fadeOut()
+        },
+        label = "DialerInputAnimation"
+    ) { targetInput ->
+        Text(
+            text = targetInput,
+            style = MaterialTheme.typography.headlineMedium.copy(fontSize = 32.sp),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .wrapContentWidth(Alignment.CenterHorizontally)
+        )
     }
 }
