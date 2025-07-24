@@ -68,6 +68,6 @@ dependencies {
     // ML Kit Barcode Scanner
     implementation("com.google.mlkit:barcode-scanning:17.3.0")
 
-    // Easy permission
-
+    // For LazyVerticalGrid
+    implementation("androidx.compose.foundation:foundation:1.8.3")
 }
