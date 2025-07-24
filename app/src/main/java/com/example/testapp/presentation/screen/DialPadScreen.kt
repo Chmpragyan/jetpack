@@ -64,6 +64,16 @@ fun DialPadScreen() {
                 }
             }
         }
+
+        // Backspace or Clear
+        Button(
+            onClick = {
+                if (input.isNotEmpty()) input = input.dropLast(1)
+            },
+            modifier = Modifier.padding(top = 16.dp)
+        ) {
+            Text(text = "Backspace")
+        }
     }
 }
 
