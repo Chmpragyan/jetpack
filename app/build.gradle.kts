@@ -70,4 +70,7 @@ dependencies {
 
     // For LazyVerticalGrid
     implementation("androidx.compose.foundation:foundation:1.8.3")
+
+    // Lottie Animation
+    implementation("com.airbnb.android:lottie-compose:6.6.7")
 }
