@@ -25,11 +25,11 @@ fun SplashScreen(
         scale.animateTo(
             targetValue = 1f,
             animationSpec = tween(
-                durationMillis = 1500,
+                durationMillis = 1000,
                 easing = FastOutSlowInEasing
             )
         )
-        delay(5000)
+        delay(1500)
         onAnimationFinished()
     }
 
